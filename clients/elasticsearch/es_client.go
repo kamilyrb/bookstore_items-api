@@ -3,7 +3,7 @@ package elasticsearch
 import (
 	"context"
 	"fmt"
-	"github.com/kamilyrb/bookstore_items-api/logger"
+	"github.com/kamilyrb/bookstore_utils-go/logger"
 	"github.com/olivere/elastic"
 	"time"
 )
@@ -22,12 +22,14 @@ type esClient struct {
 }
 
 func Init() {
+	log := logger.GetLogger()
+
 	client, err := elastic.NewClient(
 		elastic.SetURL("http://localhost:9200"),
 		elastic.SetSniff(false),
 		elastic.SetHealthcheckInterval(10*time.Second),
-		//elastic.SetErrorLog(log.New(os.Stderr, "ELASTIC ", log.LstdFlags)),
-		//elastic.SetInfoLog(log.New(os.Stdout, "", log.LstdFlags)),
+		elastic.SetErrorLog(log),
+		elastic.SetInfoLog(log),
 		//elastic.SetHeaders(http.Header{
 		//	"X-Caller-Id": []string{"..."},
 		//}),

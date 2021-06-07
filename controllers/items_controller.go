@@ -4,6 +4,7 @@ import (
 	"encoding/json"
 	"github.com/gorilla/mux"
 	"github.com/kamilyrb/bookstore_items-api/domain/items"
+	"github.com/kamilyrb/bookstore_items-api/domain/queries"
 	"github.com/kamilyrb/bookstore_items-api/services"
 	"github.com/kamilyrb/bookstore_items-api/utils/http_utils"
 	"github.com/kamilyrb/bookstore_oauth-go/oauth"
@@ -18,8 +19,9 @@ var (
 )
 
 type itemsControllerInterface interface {
-	Create(http.ResponseWriter, *http.Request)
 	Get(http.ResponseWriter, *http.Request)
+	Create(http.ResponseWriter, *http.Request)
+	Search(http.ResponseWriter, *http.Request)
 }
 
 type itemsController struct {
@@ -69,4 +71,26 @@ func (*itemsController) Get(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 	http_utils.RespondJson(w, http.StatusOK, item)
+}
+
+func (*itemsController) Search(w http.ResponseWriter, r *http.Request) {
+	bytes, err := ioutil.ReadAll(r.Body)
+	if err != nil {
+		apiErr := rest_errors.NewBadRequestError("invalid json body")
+		http_utils.RespondError(w, apiErr)
+	}
+	defer r.Body.Close()
+
+	var query queries.EsQuery
+	if err := json.Unmarshal(bytes, &query); err != nil {
+		apiErr := rest_errors.NewBadRequestError("invalid json body")
+		http_utils.RespondError(w, apiErr)
+		return
+	}
+	itemsResult, searchErr := services.ItemsService.Search(query)
+	if searchErr != nil {
+		http_utils.RespondError(w, searchErr)
+		return
+	}
+	http_utils.RespondJson(w, http.StatusOK, itemsResult)
 }

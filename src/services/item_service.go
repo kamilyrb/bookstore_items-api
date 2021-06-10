@@ -1,8 +1,8 @@
 package services
 
 import (
-	"github.com/kamilyrb/bookstore_items-api/domain/items"
-	"github.com/kamilyrb/bookstore_items-api/domain/queries"
+	"github.com/kamilyrb/bookstore_items-api/src/domain/items"
+	"github.com/kamilyrb/bookstore_items-api/src/domain/queries"
 	"github.com/kamilyrb/bookstore_utils-go/rest_errors"
 )
 

@@ -1,4 +1,4 @@
-module github.com/kamilyrb/bookstore_items-api
+module github.com/kamilyrb/bookstore_items-api/src
 
 go 1.16
 
@@ -10,5 +10,4 @@ require (
 	github.com/kamilyrb/bookstore_utils-go v0.0.0-20210606210809-6c85c9ba4d5f
 	github.com/mailru/easyjson v0.7.7 // indirect
 	github.com/olivere/elastic v6.2.35+incompatible
-	github.com/pkg/errors v0.9.1 // indirect
 )

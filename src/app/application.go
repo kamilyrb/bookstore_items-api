@@ -2,7 +2,7 @@ package app
 
 import (
 	"github.com/gorilla/mux"
-	"github.com/kamilyrb/bookstore_items-api/clients/elasticsearch"
+	"github.com/kamilyrb/bookstore_items-api/src/clients/elasticsearch"
 	"net/http"
 	"time"
 )
@@ -18,7 +18,7 @@ func StartApplication() {
 
 	srv := &http.Server{
 		Handler:      router,
-		Addr:         "127.0.0.1:8003",
+		Addr:         "localhost:8003",
 		WriteTimeout: 500 * time.Millisecond,
 		ReadTimeout:  2 * time.Second,
 		IdleTimeout:  60 * time.Second,

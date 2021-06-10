@@ -36,7 +36,7 @@ func Init() {
 		//}),
 	)
 	if err != nil {
-		panic(err)
+		//panic(err)
 	}
 	Client.setClient(client)
 }

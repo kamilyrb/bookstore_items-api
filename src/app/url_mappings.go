@@ -1,7 +1,7 @@
 package app
 
 import (
-	"github.com/kamilyrb/bookstore_items-api/controllers"
+	"github.com/kamilyrb/bookstore_items-api/src/controllers"
 	"net/http"
 )
 
